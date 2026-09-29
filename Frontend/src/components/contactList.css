@@ -1,0 +1,14 @@
+/* Grid responsive que adapta el número de columnas al espacio disponible. */
+.contact-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: var(--grid-gap);
+    align-items: start;
+}
+
+/* En pantallas muy pequeñas se fuerza una distribución de una sola columna. */
+@media (max-width: 480px) {
+    .contact-list {
+        grid-template-columns: 1fr;
+    }
+}

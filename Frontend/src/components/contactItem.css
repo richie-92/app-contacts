@@ -1,0 +1,205 @@
+/* Contenedor de la tarjeta y su panel asociado. */
+.contact-item {
+    min-width: 0;
+}
+
+/* Tarjeta principal que recibe la interacción del usuario. */
+.contact-card {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    height: clamp(9rem, 12vw, 12rem);
+    padding: 1.5rem;
+    align-items: flex-end;
+    justify-content: flex-end;
+    overflow: hidden;
+    border-radius: 1.15rem;
+    background:
+        linear-gradient(
+            rgba(13, 18, 16, 0.2),
+            rgba(13, 18, 16, 0.8)
+        ),
+        linear-gradient(
+            var(--color-card),
+            var(--color-card)
+        ),
+        url('https://images.unsplash.com/photo-1631783847971-a6277b5495c7?q=80&w=2535&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center / cover no-repeat;
+    color: var(--color-card-text);
+    cursor: pointer;
+    text-align: right;
+    transition:
+        transform 180ms ease,
+        filter 180ms ease;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        0 0 18px rgba(190, 215, 195, 0.05);
+}
+
+/* Proporciona retroalimentación visual al pasar el cursor. */
+.contact-card:hover {
+    filter: brightness(1.035);
+    transform: translateY(-2px);
+}
+
+/* Estado de foco visible para navegación mediante teclado. */
+.contact-card:focus-visible {
+    outline: 2px solid var(--color-panel-text);
+    outline-offset: 4px;
+}
+
+/* Contenedor tipográfico inferior de la tarjeta. */
+.contact-card__name {
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+    overflow: hidden;
+    line-height: 0.95;
+}
+
+/* Apellido, más pequeño que el nombre. */
+.contact-card__last-name {
+    width: 100%;
+    overflow: hidden;
+    font-family: var(--font-functional);
+    font-size: clamp(0.9rem, 1.35vw, 1.25rem);
+    font-weight: 500;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Nombre principal de la tarjeta. */
+.contact-card__first-name {
+    width: 100%;
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.65rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Estado cerrado del panel: la fila del grid se colapsa y el contenido queda oculto. */
+.contact-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    visibility: hidden;
+    border-radius: 1.15rem;
+    background:
+        linear-gradient(
+            rgba(13, 18, 16, 0.3),
+            rgba(13, 18, 16, 0.8)
+        ),
+        var(--color-panel);
+    opacity: 0;
+    transition:
+        grid-template-rows 450ms ease,
+        opacity 350ms ease;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        0 0 18px rgba(190, 215, 195, 0.05);
+}
+
+/* Estado abierto: expande la fila del grid y hace visible el contenido. */
+.contact-panel--open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Contenedor interno que permite controlar la altura animada del panel. */
+.contact-panel__content {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+    padding: 1.25rem 1.25rem 4rem;
+    color: var(--color-panel-text);
+}
+
+/* Grupo de información mostrado en la parte superior. */
+.contact-panel__details {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* Cada dato combina icono y texto en una línea. */
+.contact-panel__detail {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.92rem;
+    line-height: 1.2;
+}
+
+/* Evita que el icono se reduzca como elemento flex cuando el espacio es limitado. */
+.contact-panel__detail svg {
+    flex: 0 0 auto;
+}
+
+/* Mantiene el valor en una sola línea y muestra puntos suspensivos si desborda. */
+.contact-panel__detail span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Botón de edición representado únicamente mediante un icono. */
+.contact-panel__edit {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid rgba(226, 213, 195, 0.24);
+    border-radius: 50%;
+    background: rgba(226, 213, 195, 0.06);
+    color: var(--color-panel-text);
+    cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        transform 160ms ease;
+}
+
+/* Feedback visual del botón de edición. */
+.contact-panel__edit:hover {
+    border-color: rgba(226, 213, 195, 0.42);
+    background: rgba(226, 213, 195, 0.12);
+    transform: translateY(-1px);
+}
+
+/* Estado de foco visible del botón de edición. */
+.contact-panel__edit:focus-visible {
+    outline: 2px solid var(--color-panel-text);
+    outline-offset: 3px;
+}
+
+/* Contenedor estructural que limita el desbordamiento del panel. */
+.contact-panel__wrapper {
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* Reduce la altura de la tarjeta en pantallas pequeñas. */
+@media (max-width: 700px) {
+    .contact-card {
+        height: 7.5rem;
+    }
+
+    /* Impide la interacción con el botón cuando está deshabilitado. */
+    .contact-panel__edit:disabled {
+        pointer-events: none;
+    }
+}

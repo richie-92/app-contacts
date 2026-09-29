@@ -1,0 +1,160 @@
+/* Importa las tipografías utilizadas por la interfaz y los elementos destacados. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@500;600;700;800&display=swap');
+
+/* Variables centrales del lenguaje visual de la aplicación. */
+:root {
+    --color-background: #0d1210;
+    --color-card: rgba(126, 148, 132, 0.68);
+    --color-panel: rgba(145, 158, 146, 0.75);
+    --color-card-text: #e9eee8;
+    --color-panel-text: #dce6dc;
+    --color-header: #a9c2a9;
+
+    --font-functional: 'DM Sans', sans-serif;
+    --font-display: 'Syne', sans-serif;
+
+    --content-width: 1440px;
+    --page-padding: clamp(1.25rem, 4vw, 4.5rem);
+    --grid-gap: clamp(1rem, 2vw, 2rem);
+    --bottom-space: 10rem;
+}
+
+/* Reinicia el comportamiento básico del documento. */
+* {
+    box-sizing: border-box;
+}
+
+/* Establece una altura mínima para ocupar todo el espacio disponible. */
+html,
+body,
+#root {
+    min-height: 100%;
+    margin: 0;
+}
+
+/* Habilita el desplazamiento suave del documento. */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Define el fondo y la tipografía funcional global. */
+body {
+    background: var(--color-background);
+    color: var(--color-panel-text);
+    font-family: var(--font-functional);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Hereda la tipografía en los controles nativos. */
+button,
+input {
+    font: inherit;
+}
+
+/* Elimina el borde predeterminado de los botones. */
+button {
+    border: 0;
+}
+
+/* Pantalla inicial que ocupa todo el viewport. */
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: var(--page-padding);
+    background: var(--color-background);
+    color: var(--color-header);
+    opacity: 1;
+    transition: opacity 650ms ease;
+}
+
+/* Estado de salida de la pantalla inicial. */
+.intro-screen--fading {
+    opacity: 0;
+}
+
+/* Título principal de la pantalla inicial. */
+.intro-screen h1 {
+    max-width: 900px;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 600;
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+}
+
+/* Contenedor principal de la aplicación. */
+.app {
+    min-height: 100vh;
+    background: var(--color-background);
+}
+
+/* Encabezado que permanece visible durante el desplazamiento. */
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 1.5rem var(--page-padding);
+    background: rgba(13, 18, 16, 0.82);
+    color: var(--color-header);
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+/* Área que contiene la colección de contactos. */
+.app-main {
+    width: min(100%, var(--content-width));
+    margin: 0 auto;
+    padding: 2rem var(--page-padding) var(--bottom-space);
+}
+
+/* Mensajes de estado generales. */
+.app-loading,
+.app-empty,
+.app-error {
+    margin-bottom: 1.5rem;
+    color: var(--color-panel-text);
+    font-size: 0.95rem;
+}
+
+/* El error recibe una jerarquía visual ligeramente superior. */
+.app-error {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 0.1rem);
+    left: 0;
+    text-align: center;
+    color: var(--color-panel-text);
+    font-size: 0.95rem;
+}
+
+/* Ajusta el espacio disponible en pantallas pequeñas. */
+@media (max-width: 700px) {
+    :root {
+        --bottom-space: 12rem;
+    }
+
+    /* Reduce el tamaño del título sin cambiar su composición. */
+    .intro-screen h1 {
+        font-size: clamp(3rem, 14vw, 5rem);
+    }
+
+    /* Reduce ligeramente el espacio del header. */
+    .app-header {
+        padding-top: 1.1rem;
+        padding-bottom: 1.1rem;
+    }
+
+    /* Acerca el contenido al header en móviles. */
+    .app-main {
+        padding-top: 1rem;
+    }
+}
